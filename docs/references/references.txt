@@ -1,9 +1,11 @@
-In this document it can be found the references of every text that this project is using. There is text from important books related with world football history, which is the focus of the project. 
+
+In this document it can be found the references of every text that this project is using. There 
+is text from important books related with world football history, which is the focus of the project. 
+
 Every bullet point includes the title of the file, followed by its reference below of it. These references are in IEEE format.
 
+-----------
 
-Books
-------
 • A History of the World Cup 19302010.pdf
 C. A. Lisi, A History of the World Cup: 1930-2010. Lanham, MD: Rowman & Littlefield, 2011.
 
@@ -19,13 +21,3 @@ D. Goldblatt, The Ball Is Round: A Global History of Soccer. New York: Riverhead
 • A Womans Game The Rise, Fall, and Rise Again of Womens Football.pdf
 S. Wrack, A Woman's Game: The Rise, Fall, and Rise Again of Women's Football. London: Guardian Faber, 2022.
 
-Web Sites
-------
-• FifaBackground.pdf
-FIFA, FIFA Legends celebrate FIFA’s 120th birthday, https://inside.fifa.com/about-fifa/organisation/news/fifa-legends-celebrate-fifas-120th-birthday (accessed Jun. 5, 2024). 
-
-• UefaBackground.pdf
-UEFA, Our history, https://www.uefa.com/about/our-history/ (accessed Jun. 5, 2024). 
-
-• UCL2023TechnicalReport.pdf
-UEFA, UEFA Champions League Technical Report 2023, https://uefatechnicalreports.com/pdf-ucl-2023 (accessed Jun. 5, 2024). 
