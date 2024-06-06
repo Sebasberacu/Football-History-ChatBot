@@ -4,8 +4,8 @@ Every bullet point includes the title of the file, followed by its reference bel
 
 Books
 ------
-• A History of the World Cup 1930–2010.pdf
-C. A. Lisi, A History of the World Cup: 1930-2018. Lanham, MD: Rowman & Littlefield, 2019.
+• A History of the World Cup 19302010.pdf
+C. A. Lisi, A History of the World Cup: 1930-2010. Lanham, MD: Rowman & Littlefield, 2011.
 
 • Football in Sun and Shadow.pdf
 E. Galeano, Football in Sun and Shadow. London: Fourth Estate, 1998.
