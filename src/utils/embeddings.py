@@ -13,6 +13,7 @@ def generate_embeddings(documents, index_path="faiss_index"):
     embeddings = OllamaEmbeddings(model='mxbai-embed-large')
     db = FAISS.from_documents(documents, embeddings)
     db.save_local(index_path)
+    return db
 
 def check_faiss_vectorstore(db):
     try:
