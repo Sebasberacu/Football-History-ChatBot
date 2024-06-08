@@ -29,7 +29,6 @@ def footballChatBot():
     while (running):
         question = input("\n>> ")
         if question.lower() == "exit" or question == "e": running = False
-
         else:
             response = askChatbot(question)
             print(response)

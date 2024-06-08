@@ -10,6 +10,7 @@ echo '-----------------------------------------------'
 # pip install langchain
 # pip install langchain-community
 # pip install pypdf
+# pip install PyMuPDF
 
 # Execute the program
 #python src/main.py

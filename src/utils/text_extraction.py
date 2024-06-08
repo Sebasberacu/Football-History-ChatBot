@@ -1,8 +1,16 @@
 import fitz  # PyMuPDF
+import os
 
-def extract_text_from_pdf(pdf_path):
-    doc = fitz.open(pdf_path)
-    text = ""
-    for page in doc:
-        text += page.get_text()
-    return text
+def extractTextFromPdf(fileName):
+    currentDir = os.path.dirname(os.path.abspath(__file__))
+    pdfFilePath = os.path.join(currentDir, '..', '..', 'docs', 'references', 'documents', fileName)
+
+    try:
+        doc = fitz.open(pdfFilePath)
+        text = ""
+        for page in doc:
+            text += page.get_text()
+        return text
+    except Exception as e:
+        print("An error occurred:", str(e))
+        return ""
