@@ -1,2 +1,3 @@
 .DS_Store
 src/utils/__pycache__
+faiss_index
