@@ -8,7 +8,7 @@ llama3 = Llama3()
 llama3.start()
 
 # Path to the embeddings folder
-embeddingsPath = "../faiss_football_documents/"
+embeddingsPath = "faiss_football_documents"
 
 # List of the documents to be used by the RAG System
 pdfFiles = [
@@ -31,7 +31,7 @@ def createEmbeddings(embeddingsPath):
         allDocuments = []
         
         for document in pdfFiles: # Extract the text from the pdf files
-            documentPath = os.path.join(currentDir, '..', 'docs', 'references', 'documents', document)
+            documentPath = os.path.join(currentDir, '..', 'docs', 'knowledge-database', 'documents', document)
             
             documentText = extractTextFromPdf(documentPath)
             splittedDocument = splitText(documentText)
