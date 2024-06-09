@@ -1,16 +1,23 @@
 # RAG Soccer ChatBot <!-- omit in toc -->
 
 - [Get Started](#get-started)
-  - [Ollama](#ollama)
+  - [Models](#models)
   - [Python Virtual Environment](#python-virtual-environment)
     - [New Dependencies](#new-dependencies)
 
 
 ## Get Started
 
-### Ollama
+For this project, you need to download and install [Ollama](https://ollama.com/download).
 
-For this project you need to download [Ollama](https://ollama.com/download).
+Once you have installed Ollama, you can execute the setup script for your specific machine:
+
+* **Windows:** Execute the script `setup-windows.bat`.
+* **Linux or Mac:** Execute the script `setup-linux-mac.sh`.
+
+If you don't want to execute these scripts, you can follow the following instructions.
+
+### Models
 
 1. **Pull the Llama3 model:**
 
@@ -65,8 +72,6 @@ python -m ipykernel install --user --name=venv
 ```bash
 deactivate
 ```
-
-You can also execute the scripts present in the project for your specific machine. Note that they are `.sh` files, so you have to execute them with a bash terminal.
 
 #### New Dependencies
 
