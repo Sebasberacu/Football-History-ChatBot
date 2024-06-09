@@ -6,10 +6,18 @@
 
 For this project you need to download [Ollama](https://ollama.com/download).
 
-After you downloaded it, you have to pull the Llama3 model with:
+After you downloaded it, you have to pull 2 models with the following commands:
+
+* Llama3
 
 ```bash
 ollama pull llama3
+```
+
+* Large Embedding Model
+
+```bash
+ollama pull mxbai-embed-large
 ```
 
 ### Python Virtual Environment
