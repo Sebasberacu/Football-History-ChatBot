@@ -1,4 +1,10 @@
-# RAG Soccer ChatBot
+# RAG Soccer ChatBot <!-- omit in toc -->
+
+- [Get Started](#get-started)
+  - [Ollama](#ollama)
+  - [Python Virtual Environment](#python-virtual-environment)
+    - [New Dependencies](#new-dependencies)
+
 
 ## Get Started
 
@@ -6,15 +12,13 @@
 
 For this project you need to download [Ollama](https://ollama.com/download).
 
-After you downloaded it, you have to pull 2 models with the following commands:
-
-* Llama3
+1. **Pull the Llama3 model:**
 
 ```bash
 ollama pull llama3
 ```
 
-* Large Embedding Model
+2. **Pull the Large Embedding Model**
 
 ```bash
 ollama pull mxbai-embed-large
@@ -22,36 +26,47 @@ ollama pull mxbai-embed-large
 
 ### Python Virtual Environment
 
-To run this project for the first time you have to create a python virtual environment. To do this just execute the corresponding script:
+To run this project for the first time you have to create a python virtual environment:
 
-* For Windows execute the script: `init-venv-windows.sh`.
-* For Mac or Linux execute the script: `init-venv-mac-linux.sh`.
-
-**NOTE:** It's a `sh` file, so it has to be executed with a bash terminal.
-
-#### Deactivation - Activation 
-
-* To deactivate the virtual environment execute the command:
+1. **Create the virtual environment**
 
 ```bash
-deactivate
+python -m venv .env
 ```
 
-To activate the virtual environment execute the following command:
+2. **Activate the virtual environment**    
 
-* For Windows execute the command :
+**For Windows:**
 
-```
+```powershell
 .env/Scripts/activate
 ```
 
-* For Mac or Linux execute the command:
+**For Mac or Linux:**
 
 ```bash
 source .env/bin/activate
 ```
 
-**NOTE:** If you are using a bash terminal to execute the Windows command, you have to add the word `source` at the beginning like this `source .env/Scripts/activate`.
+3. **Install the dependencies**
+
+```bash
+pip install -r requirements.txt
+```
+
+4. **Setup the ipynb kernel**
+
+```bash
+python -m ipykernel install --user --name=venv
+```
+
+5. **To deactivate the virtual environment**
+
+```bash
+deactivate
+```
+
+You can also execute the scripts present in the project for your specific machine. Note that they are `.sh` files, so you have to execute them with a bash terminal.
 
 #### New Dependencies
 
