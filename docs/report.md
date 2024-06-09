@@ -18,6 +18,10 @@ Kenneth Obando Rodríguez
 
 Leer el archivo `README.md` del proyecto. 
 
+## Selección de Documentos
+
+Texto. 
+
 ## Generación de los Vectores de Embeddings
 
 ### Extracción de Texto
