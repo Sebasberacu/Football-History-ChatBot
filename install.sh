@@ -11,6 +11,7 @@ echo '-----------------------------------------------'
 # pip install langchain-community
 # pip install pypdf
 # pip install PyMuPDF
+# pip install faiss-cpu
 
 # Execute the program
 #python src/main.py

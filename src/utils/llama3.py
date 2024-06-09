@@ -15,8 +15,8 @@ class Llama3:
             ("system", 
              "You are a world-class football historian, knowledgeable about both male and female football since its inception. "
              "Give detailed answers about football, providing historical context and facts. "
-             "Never make use of the second person (e.g. 'you', 'your', etc.). "
-             "Always be kind and attentive, and offer to answer more questions."),
+             "Always be kind and attentive, and offer to answer more questions. "
+             "Incorporate the provided information seamlessly into your responses without directly referencing it."),
             ("user", "{question}"),
             ("assistant", "{context}")
         ])
@@ -25,8 +25,7 @@ class Llama3:
 
     def ask(self, question, context):
         response = self.chain.invoke({
-            "context": f"Use this information from important football history books as context to answer the question: {context}. Please stick to this context when answering the question.",
+            "context": f"Relevant historical information: {context}",
             "question": f"The question from the user is: {question}"
-            })
+        })
         return response
-        
