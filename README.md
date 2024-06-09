@@ -2,7 +2,7 @@
 
 ## Get Started
 
-To run this project you have to create a python virtual environment. To do this just execute the corresponding script:
+To run this project for the first time you have to create a python virtual environment. To do this just execute the corresponding script:
 
 * For Windows execute the script `init-venv-windows.sh`.
 * For Mac or Linux execute the script `init-venv-mac-linux.sh`.
