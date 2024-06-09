@@ -1,3 +1,6 @@
+ollama pull llama3
+ollama pull mxbai-embed-large
+
 python -m venv .env
 
 source .env/bin/activate
