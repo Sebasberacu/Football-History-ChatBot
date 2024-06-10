@@ -3,7 +3,7 @@ import os
 
 def extractTextFromPdf(fileName):
     currentDir = os.path.dirname(os.path.abspath(__file__))
-    pdfFilePath = os.path.join(currentDir, '..', '..', 'docs', 'references', 'documents', fileName)
+    pdfFilePath = os.path.join(currentDir, '..', '..', 'docs', 'knowledge-database', 'documents', fileName)
 
     try:
         doc = fitz.open(pdfFilePath)

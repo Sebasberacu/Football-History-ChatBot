@@ -8,7 +8,8 @@ llama3 = Llama3()
 llama3.start()
 
 # Path to the embeddings folder
-embeddingsPath = "faiss_football_documents"
+currentDir = os.path.dirname(os.path.abspath(__file__))
+embeddingsPath = os.path.join(currentDir, '..', 'faiss_football_documents')
 
 # List of the documents to be used by the RAG System
 pdfFiles = [
@@ -20,14 +21,13 @@ pdfFiles = [
 ]
 
 # Create or load the embeddings database
-def createEmbeddings(embeddingsPath):
+def createEmbeddings():
     if os.path.exists(embeddingsPath):  # If the embeddings db folder exists
         embeddings = OllamaEmbeddings(model='mxbai-embed-large')
         db = FAISS.load_local(embeddingsPath, embeddings, allow_dangerous_deserialization=True)  # Load the index
         return db if checkFaissVectorstore(db) else None
     
     else:  # If the index does not exist, create it
-        currentDir = os.path.dirname(os.path.abspath(__file__))
         allDocuments = []
         
         for document in pdfFiles: # Extract the text from the pdf files
@@ -41,13 +41,7 @@ def createEmbeddings(embeddingsPath):
         # df = pd.DataFrame([doc.page_content for doc in allDocuments], columns=["Content"])
         # print(df.head())
 
-        # TODO: Delete time measures and print statements
-        print("Proceeding with the embeddings generation.")
-        start_time = time.time()
         db = generateEmbeddings(allDocuments, embeddingsPath) # Generate and save the embeddings
-        end_time = time.time()
-        elapsed_time = end_time - start_time
-        print(f"El tiempo total de ejecución de los embeddings fue de {elapsed_time:.2f} segundos.")
 
         return db if checkFaissVectorstore(db) else None
 
@@ -62,7 +56,7 @@ def askChatbot(embeddingsDB, question):
 
 # Initialize the chatbot
 def footballChatBot():
-    embeddingsDB = createEmbeddings(embeddingsPath) # Load or charge the embeddings db
+    embeddingsDB = createEmbeddings() # Load or charge the embeddings db
     print("\nWelcome to the football chatbot!\n"+
           "I am a world-class football historian and I am here to talk about anything you want about football.\n\n"+
           "To exit the chatbot, type 'exit' at any time.")
