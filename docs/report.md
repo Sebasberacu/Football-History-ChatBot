@@ -1,4 +1,4 @@
-# **RAG System Project**
+# **RAG System Project** <!-- omit in toc -->
 **Escuela de Ingeniería en Computación**
 
 **IC6200 - Inteligencia Artificial**
@@ -11,9 +11,28 @@
 **Profesor:**
 Kenneth Obando Rodríguez
 
-**Fecha de entrega:**
-2024-06-09
+**Fecha de Entrega:** 2024-06-09
 
+## Tabla de Contenidos <!-- omit in toc -->
+
+- [Introducción](#introducción)
+- [Ejecución del Programa](#ejecución-del-programa)
+- [Almacenamiento de Embeddings](#almacenamiento-de-embeddings)
+- [Generación de Embeddings](#generación-de-embeddings)
+  - [Extracción de Texto](#extracción-de-texto)
+  - [Generación y Almacenamiento de Embeddings](#generación-y-almacenamiento-de-embeddings)
+    - [División del Texto](#división-del-texto)
+    - [Generar y Guardar los Embeddings](#generar-y-guardar-los-embeddings)
+- [Implementación del Modelo LLM](#implementación-del-modelo-llm)
+- [Fine Tuning](#fine-tuning)
+  - [Limpieza de Datos](#limpieza-de-datos)
+  - [Datasets y Entrenamiento](#datasets-y-entrenamiento)
+- [Pruebas Finales](#pruebas-finales)
+- [Análisis de Resultados](#análisis-de-resultados)
+  - [Almacenamiento y Generación de Embeddings](#almacenamiento-y-generación-de-embeddings)
+  - [Implementación del Modelo LLM](#implementación-del-modelo-llm-1)
+    - [Demostraciones de Pruebas](#demostraciones-de-pruebas)
+  - [Conclusión General](#conclusión-general)
 
 ## Introducción
 
@@ -66,7 +85,7 @@ def extract_text_from_pdf(pdf_path):
     return text
 ```
 
-#### Prueba
+#### Prueba <!-- omit in toc -->
 
 Para observar qué esta funcionando, podemos llamarla y observar el largo del texto extraído:
 
@@ -129,7 +148,7 @@ def check_faiss_vectorstore(db):
         return False 
 ```
 
-#### Prueba
+#### Prueba <!-- omit in toc -->
 
 Ahora, se realizarán dos pruebas con todo lo implementado. Una sin haber guardado el archivo y la otra una vez guardado. Esta parte simula cómo se debe utilizar la extracción de texto y la generación de embeddings en un archivo main. El pdf utilizado es un cuento de los tres cerditos en inglés, que puede enocntrar en el directorio `docs/testing/three-little-pigs-story.pdf`. Tiene 6 páginas de longitud. 
 
@@ -185,7 +204,7 @@ print(f"El tiempo total de ejecución fue de {elapsed_time:.2f} segundos.")
 
 ```
 
-#### Resultado 1
+#### Resultado 1 <!-- omit in toc -->
 
 En el resultado 1, no existe indice faiss guardado localmente, por lo tanto se va a ejecutar el else, observemos las impresiones en consola:
 
@@ -202,7 +221,7 @@ El índice FAISS fue creado y verificado correctamente.
 El tiempo total de ejecución fue de 79.24 segundos.
 ```
 
-#### Resultado 2
+#### Resultado 2 <!-- omit in toc -->
 
 En este resultado, el índice ya existe, por consecuencia, simplemente se va a cargar y se mostrará la información de la bd. 
 
@@ -261,7 +280,8 @@ Sin embargo, obtener la versión final de esta clase requirió de varias pruebas
 
 A continuación se mostrarán algunas pruebas, utilizando la misma pregunta, con diferentes configuraciones para el modelo, para demostrar su afectación a las instrucciones dadas y el porqué el prompt actual es ideal para cumplir con el propósito del chat bot. Todas las pruebas utilizarán los textos de los *embeddings* más cercanos a la pregunta, es decir, ya tendrá alimentado el contexto extraído de los libros de referencia. La pregunta será: "¿Cuáles son algunas de las contribuciones más significativas de Pelé al fútbol de clubes y al fútbol internacional?"
 
-### Prompt 1
+### Prompt 1 <!-- omit in toc -->
+
 En este prompt no se le especifica ningún detalle al modelo. Tan solo se le envía la pregunta y se solicita la respuesta.
 ```python
 self.prompt = ChatPromptTemplate.from_messages([
@@ -297,7 +317,8 @@ Pelé's remarkable achievements have left an indelible mark on the world of foot
 ```
 Con esta respuesta, se pueden determinar algunos aspectos no deseados en la respuesta del chat bot. En primer lugar, el chat bot no se comporta como un historiador con amplio conocimiento del fútbol, pero tampoco mantiene una interacción dinámica con el usuario, tan solo brinda respuestas puntuales, lo cual no es el comportamiento deseado. Además, no utiliza la información del contexto en su respuesta, pues no se le indica como tal que lo haga. En términos generales, un prompt vacío como este jamás podría funcionar como la versión final de un historiador del fútbol mundial que conversa con usuarios.
 
-### Prompt 2
+### Prompt 2 <!-- omit in toc -->
+
 En este prompt se le especifica al modelo que es una experto en la historia del fútbol mundial y que de respuestas detalladas. No se le pide más.
 ```python
 self.prompt = ChatPromptTemplate.from_messages([
@@ -328,7 +349,8 @@ In conclusion, Pelé's contributions to club and international football are noth
 ```
 En esta respuesta, tras darle indicaciones al modelo, su funcionamiento se acerca más al deseado, pues brinda detalles más específicos en su respuesta y comprende que está interactuando con algún usario. Sin embargo, no cumple con ofrecer más preguntas al usuario, y además, como más importante, el modelo no recibe indicaciones para utilizar el contexto proveído para brindar una respuesta, por lo que puede estar omitiendo información importante que se le está brindando.
 
-### Prompt 3
+### Prompt 3 <!-- omit in toc -->
+
 En este prompt se le da las indicaciones anteriores, se le pide al modelo que sea amable y atento, y que se ofrezca a responder más preguntas, lo cual es el funcionamiento deseado. Además, se le detalla puntualmente que utilice el contexto proveído para responder a la pregunta.
 ```python
 self.prompt = ChatPromptTemplate.from_messages([
@@ -360,7 +382,8 @@ In conclusion, Pelé's contributions to club and international football are trul
 ```
 Este prompt se acerca en su gran mayoría al funcionamiento deseado del chat bot. Sin embargo, hay un detalle que hay que cuidar: en la respuesta, el modelo se refiere directamente a la información incluida en el contexto (al decir "*As you mentioned...*") lo que puede llevar a generar confusiones al usuario, y además, revela el uso del contexto proveído de la base de datos de los textos de los libros de referencia. Se desea que el uso de este contexto sea "escondido" y que simplemente ayude al modelo a genera una respuesta más concisa.
 
-### Prompt 4
+### Prompt 4 <!-- omit in toc -->
+
 A diferencia del prompt anterior, en este se le pide al modelo que no se refiera directamente al contenido del contexto. Con esto, se logra el funcionamiento deseado del chat bot, cumpliendo con: ser amable y detallado, incluir detalles históricos, tomar en cuenta el contexto dado para dar su respuesta, no referirse directamente al contexto, y ofrecerse a responder más preguntas.
 ```python
 self.prompt = ChatPromptTemplate.from_messages([
@@ -392,7 +415,70 @@ In summary, Pelé's contributions to club football were marked by his incredible
 ```
 ## Fine Tuning 
 
-Texto.
+El procedimiento del fine tunning no se pudo concretar por falta de recursos computacionales, pero si se hizo un proceso de preparación de los datos para el debido entrenamiento. Dado que el entrenamiento como tal no se pudo hacer, en esta sección se explicará principalmente el proceso que se llevó a cabo para preparar los datos. Cabe aclarar que se seleccionó solo 1 pdf de la base de datos de conocimiento para este proceso.
+
+**Nota:** El proceso del intento del fine tunning se puede encontrar en el cuaderno de Jupyter `../src/rag_football_chatbot.ipynb`.
+
+### Limpieza de Datos
+
+Los pasos que seguimos para la limpieza de los datos fueron los siguientes:
+
+1. Cargar el pdf a memoria.
+2. Eliminar aquellas páginas que no son relevantes, como la portada, índice y demás.
+3. El pdf cargado en memoria consiste de una lista de objetos que contienen el texto como tal y metadatos, para este caso los metadatos no son importantes, por lo que se crea una nueva lista conteniendo solamente el texto de cada página.
+4. Luego vamos a crear una nueva lista donde vamos a guardar las diferentes líneas de todo el texto.
+5. Ahora hay que limpiar las líneas, ya que algunas contienen citas de referencias, secciones y demás, eso se logra con la funciones:
+
+```python
+# Function to check if a string is a roman number
+def isRomanNumeral(s):
+    try:
+        roman.fromRoman(s)
+        return True
+    except roman.InvalidRomanNumeralError:
+        return False
+
+# Clean the lines
+def cleanLines(lines):
+    cleanedLines = []
+    for line in lines:
+        temp = line.strip()
+        
+        if (temp.isdigit()):
+            continue
+        elif (temp == ''):
+            continue
+        elif (isRomanNumeral(temp)):
+            continue
+
+        temp = re.sub(r"’\d", "’", temp)
+        temp = re.sub(r"\.\d", ".", temp)
+        
+        cleanedLines += [temp]
+    
+    return cleanedLines
+```
+
+6. Una vez las líneas están limpias, vamos a juntar todas las líneas en un único string, separando las líneas con un espacio en blanco.
+7. Ahora vamos a tokenizar el string en oraciones utilizando la libreria `nltk`.
+8. Por último en término de limpieza, iteramos sobre las oraciones y eliminamos aquellos strings que solamente tiene el caracter `.`.
+
+### Datasets y Entrenamiento
+
+Una vez teniendo los datos limpios, se puede proceder a crear los datasets y configurar el entrenamiento.
+
+1. Se crea un primer dataset donde el texto de entrada es la oración y la etiqueta de esta oración es la oración que sigue.
+2. Ahora se separa el dataset en 3 datasets: train, validation, test.
+3. Ahora hay que codificar las oraciones de entrada para que el modelo pueda aprender de ellas, esto se logra con el `AutoTokenizer` de la libreria `transformers`.
+4. Por último se configuran los hiperparámetros del entrenamiento, se probó con entrenamiento con GPU y también con CPU, pero en el entrenamiento con GPU no se logró encontrar una configuración óptima ya que se obtenía error de alocación de memoria y con CPU el entrenamiento era muy lento. Los hiperparámetros que se probaron fueron:
+
+    * **num_train_epochs:** `3`.
+    * **per_device_train_batch_size:** `4` y `8`.
+    * **per_device_eval_batch_size:** `4` y `8`.
+    * **save_steps:** `100`.
+    * **eval_strategy:** `'epoch'`.
+    * **fp16:** `True`
+    * **learning_rate:** `5e-5`
 
 ## Pruebas Finales 
 
