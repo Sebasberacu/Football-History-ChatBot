@@ -94,3 +94,5 @@ You need to be logged in Hugging Face in the terminal to execute the notebook.
 ```bash
 huggingface-cli login
 ```
+
+2. **Enter the access token**
