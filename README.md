@@ -22,7 +22,7 @@ If you don't want to execute these scripts, you can follow the following instruc
 
 ### Models
 
-1. **Pull the Llama3 model:**
+1. **Pull the Llama3 model**
 
 ```bash
 ollama pull llama3
