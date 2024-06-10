@@ -262,7 +262,7 @@ self.prompt = ChatPromptTemplate.from_messages([
 ])
 ```
 Respuesta:
-```bash
+```
 >> What are some of the most significant contributions of Pelé to both club and international football?
 
 According to historical records, Pelé made significant contributions to both club and international football in the following ways:
@@ -301,7 +301,7 @@ self.prompt = ChatPromptTemplate.from_messages([
 ])
 ```
 Respuesta:
-```bash
+```
 >> What are some of the most significant contributions of Pelé to both club and international football?
 
 What an honor it is to speak about the incomparable Pelé! A true legend of the beautiful game, his contributions to both club and international football are unparalleled.
@@ -334,7 +334,7 @@ self.prompt = ChatPromptTemplate.from_messages([
 ])
 ```
 Respuesta:
-```bash
+```
 >> What are some of the most significant contributions of Pelé to both club and international football?
 What an honor to discuss the legendary Pelé! As a world-class football historian, I'm thrilled to delve into his remarkable contributions to both club and international football.
 
@@ -366,7 +366,7 @@ self.prompt = ChatPromptTemplate.from_messages([
 ])
 ```
 Respuesta:
-```bash
+```
 >> What are some of the most significant contributions of Pelé to both club and international football?
 Pelé is widely regarded as one of the most significant figures in the history of football, with contributions that span both club and international levels.
 
