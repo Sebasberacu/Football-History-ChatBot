@@ -400,5 +400,58 @@ Texto.
 
 ## Análisis de Resultados
 
-Texto.
+### Almacenamiento y Generación de Embeddings
 
+El sistema implementado para el almacenamiento y generación de embeddings demuestra ser altamente eficiente. La elección de FAISS como base de datos vectorial es acertada debido a sus capacidades de escalabilidad y velocidad. FAISS permite manejar bases de datos con millones de vectores, garantizando que el sistema pueda crecer junto con la cantidad de datos sin perder rendimiento. Además, las técnicas avanzadas de indexación de FAISS aseguran búsquedas rápidas y precisas, esenciales para cualquier aplicación que dependa de la similitud de vectores.
+
+El flujo del proceso, desde la extracción de texto hasta la generación y almacenamiento de embeddings, está bien estructurado y documentado:
+
+1. **Extracción de Texto**: Utilizando `fitz` (PyMuPDF), se logra una extracción precisa y completa del contenido de los archivos PDF. Esta etapa inicial es fundamental para garantizar la calidad del texto que se convertirá en embeddings.
+2. **División del Texto**: La división del texto en fragmentos manejables mejora la calidad de los embeddings generados. Utilizando `RecursiveCharacterTextSplitter`, se asegura que los fragmentos tengan un tamaño adecuado y que el contexto se mantenga mediante solapamientos mínimos.
+3. **Generación y Almacenamiento de Embeddings**: La utilización del modelo `mxbai-embed-large` de Ollama para generar embeddings proporciona vectores de alta calidad que son eficientemente almacenados en FAISS. Esto asegura que los embeddings sean representaciones precisas del contenido textual.
+4. **Verificación del Almacenamiento**: La verificación del almacenamiento de los embeddings en FAISS garantiza la integridad y accesibilidad de los datos. Este paso es crucial para asegurar que el sistema funcione correctamente y que los datos estén disponibles para futuras búsquedas.
+
+Las pruebas realizadas validan la eficiencia y robustez del sistema:
+
+1. **Prueba sin Índice FAISS Existente**:
+   - **Resultados**: El sistema fue capaz de extraer el texto, dividirlo en fragmentos, generar los embeddings y almacenarlos en un nuevo índice FAISS. El tiempo total de ejecución fue de 79.24 segundos, lo cual es razonable considerando el alcance completo del proceso. Esto demuestra que el sistema puede manejar la creación de nuevos índices de manera eficiente.
+2. **Prueba con Índice FAISS Existente**:
+   - **Resultados**: El sistema cargó el índice FAISS existente y verificó su contenido en solo 0.08 segundos. Esto confirma que el acceso a índices ya almacenados es extremadamente rápido y eficiente, lo cual es crucial para aplicaciones en tiempo real.
+
+### Implementación del Modelo LLM
+
+El sistema para la implementación del modelo LLM, utilizando LangChain, demuestra ser eficiente y versátil. LangChain facilita la integración y manejo de LLMs mediante sus librerías especializadas para prompts y salidas de texto. La elección del modelo Llama 3 es acertada para el propósito del proyecto, proporcionando respuestas coherentes y contextuales basadas en los embeddings generados previamente.
+
+El proceso de implementación del modelo LLM está bien estructurado y consta de dos métodos principales que permiten una interacción efectiva y flexible con el modelo:
+
+1. **`start()`**: Este método inicializa el modelo Llama 3, definiendo el prompt por defecto y configurando la cadena de procesamiento que incluye el modelo y el parser de salidas. La configuración de un prompt adecuado es crucial para dirigir el comportamiento del modelo y asegurar que las respuestas sean relevantes y contextualmente adecuadas.
+2. **`ask(question, context)`**: Este método permite realizar preguntas al modelo, inyectando tanto la pregunta como el contexto extraído de la base de datos de embeddings en el prompt. Esto asegura que las respuestas del modelo sean informadas y contextualizadas, mejorando la relevancia y precisión de las mismas.
+
+#### Demostraciones de Pruebas
+
+Las pruebas realizadas con diferentes configuraciones de prompts demuestran cómo las instrucciones dadas al modelo afectan significativamente la calidad y el estilo de las respuestas. A continuación, se detallan los resultados de las pruebas utilizando la pregunta: "¿Cuáles son algunas de las contribuciones más significativas de Pelé al fútbol de clubes y al fútbol internacional?"
+
+1. **Prompt 1 - Sin Detalles Específicos**:
+   - **Configuración**: El modelo solo recibe la pregunta y el contexto sin instrucciones adicionales.
+   - **Resultado**: La respuesta es informativa pero carece de interacción dinámica y no utiliza el contexto adecuadamente.
+   - **Conclusión**: Un prompt vacío no es adecuado para el propósito deseado del chat bot.
+2. **Prompt 2 - Historiador de Fútbol**:
+   - **Configuración**: El modelo recibe instrucciones para actuar como un historiador de fútbol, proporcionando respuestas detalladas.
+   - **Resultado**: La respuesta mejora en detalle y relevancia, pero aún no ofrece interacción dinámica ni usa el contexto de manera óptima.
+   - **Conclusión**: Instrucciones específicas mejoran la respuesta, pero es necesario más refinamiento.
+3. **Prompt 3 - Historiador Amable y Atento**:
+   - **Configuración**: Instrucciones adicionales para ser amable, atento y ofrecer más respuestas, incorporando el contexto.
+   - **Resultado**: La respuesta es detallada y ofrece interacción, pero el modelo se refiere directamente al contexto, lo cual es indeseado.
+   - **Conclusión**: El prompt se acerca al comportamiento deseado, pero necesita evitar referencias directas al contexto.
+4. **Prompt 4 - Historiador sin Referencias Directas al Contexto**:
+   - **Configuración**: Similar al prompt 3 pero con instrucciones para no referirse directamente al contexto.
+   - **Resultado**: La respuesta cumple con todos los criterios deseados: es amable, detallada, usa el contexto sin referirse directamente a él y ofrece más interacción.
+   - **Conclusión**: Este prompt es el más adecuado para el propósito del chat bot, logrando un equilibrio óptimo entre interacción y uso del contexto.
+
+### Conclusión General
+
+El sistema desarrollado para la generación y almacenamiento de embeddings, así como la implementación del modelo LLM, demuestra ser altamente eficiente y efectivo. La elección de FAISS para la base de datos vectorial y `fitz` para la extracción de texto asegura un rendimiento óptimo, mientras que el modelo `mxbai-embed-large` de Ollama proporciona embeddings de alta calidad. La verificación del almacenamiento en FAISS garantiza la integridad y accesibilidad de los datos.
+
+El proceso de implementación del modelo LLM, utilizando LangChain, está bien estructurado y permite una interacción efectiva con el modelo Llama 3. Las pruebas con diferentes configuraciones de prompts muestran cómo las instrucciones adecuadas pueden mejorar significativamente la calidad de las respuestas del modelo. El prompt final, que evita referencias directas al contexto, cumple con todos los criterios deseados, logrando un equilibrio óptimo entre interacción y uso del contexto.
+
+Cómo consecuencia el sistema es robusto, escalable y eficiente, capaz de manejar grandes volúmenes de datos y proporcionar respuestas precisas y contextualmente adecuadas, cumpliendo con los objetivos establecidos para el proyecto.
