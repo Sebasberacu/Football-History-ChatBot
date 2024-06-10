@@ -481,18 +481,53 @@ Una vez teniendo los datos limpios, se puede proceder a crear los datasets y con
     * **learning_rate:** `5e-5`
 
 ## Pruebas Finales 
+En esta sección, se mostrarán algunas preguntas realizadas al bot con sus respectivas respuestas, tras la finalización de su construcción, para demostrar el funcionamiento del mismo.
 
-Texto.
+### Vista Inicial del Bot
+Este es el primer texto que ve el usuario tras ejecutar el programa:
+
+![Vista inicial](images/firstLook.png)
+
+### Pregunta 1
+¿Cómo influyó la etapa de Johan Cruyff como jugador y entrenador en el estilo de juego del FC Barcelona?
+Captura de la respuesta:
+
+![Prueba 1](images/test1.png)
+
+### Pregunta 2
+¿Puede explicar la importancia del Maracanazo de 1950 y su impacto en la cultura futbolística brasileña?
+Captura de la respuesta:
+
+![Prueba 1](images/test2.png)
+
+### Pregunta 3
+¿Puede ofrecer una visión general de la carrera y el legado de Marta, una de las mejores futbolistas de todos los tiempos?
+Captura de la respuesta:
+
+![Prueba 1](images/test3.png)
+
+### Pregunta 4
+¿Cuáles fueron los factores clave del dominio de la selección nacional húngara a principios de la década de 1950 y qué la llevó a la decadencia?
+Captura de la respuesta:
+
+![Prueba 1](images/test4.png)
+
+### Pregunta 5
+¿A qué se debe el éxito de la formación 4-3-3 a lo largo de la historia del fútbol? ¿Qué otras formaciones han tenido éxito?
+Captura de la respuesta:
+
+![Prueba 1](images/test5.png)
+
 
 ## Análisis de Resultados
 
 ### Almacenamiento y Generación de Embeddings
 
-El sistema implementado para el almacenamiento y generación de embeddings demuestra ser altamente eficiente. La elección de FAISS como base de datos vectorial es acertada debido a sus capacidades de escalabilidad y velocidad. FAISS permite manejar bases de datos con millones de vectores, garantizando que el sistema pueda crecer junto con la cantidad de datos sin perder rendimiento. Además, las técnicas avanzadas de indexación de FAISS aseguran búsquedas rápidas y precisas, esenciales para cualquier aplicación que dependa de la similitud de vectores.
+El sistema implementado para el almacenamiento y generación de embeddings demuestra ser altamente eficiente. La elección de FAISS como base de datos vectorial es eficaz debido a sus capacidades de escalabilidad y velocidad. FAISS permite manejar bases de datos con millones de vectores, garantizando que el sistema pueda crecer junto con la cantidad de datos sin perder rendimiento. Además, las técnicas avanzadas de indexación de FAISS aseguran búsquedas rápidas y precisas, esenciales para cualquier aplicación que dependa de la similitud de vectores.
 
 El flujo del proceso, desde la extracción de texto hasta la generación y almacenamiento de embeddings, está bien estructurado y documentado:
 
-1. **Extracción de Texto**: Utilizando `fitz` (PyMuPDF), se logra una extracción precisa y completa del contenido de los archivos PDF. Esta etapa inicial es fundamental para garantizar la calidad del texto que se convertirá en embeddings.
+1. **Extracción de Texto**: Utilizando `fitz` (PyMuPDF), se logra una extracción precisa y completa del contenido de los archivos PDF.
 2. **División del Texto**: La división del texto en fragmentos manejables mejora la calidad de los embeddings generados. Utilizando `RecursiveCharacterTextSplitter`, se asegura que los fragmentos tengan un tamaño adecuado y que el contexto se mantenga mediante solapamientos mínimos.
 3. **Generación y Almacenamiento de Embeddings**: La utilización del modelo `mxbai-embed-large` de Ollama para generar embeddings proporciona vectores de alta calidad que son eficientemente almacenados en FAISS. Esto asegura que los embeddings sean representaciones precisas del contenido textual.
 4. **Verificación del Almacenamiento**: La verificación del almacenamiento de los embeddings en FAISS garantiza la integridad y accesibilidad de los datos. Este paso es crucial para asegurar que el sistema funcione correctamente y que los datos estén disponibles para futuras búsquedas.
@@ -506,38 +541,28 @@ Las pruebas realizadas validan la eficiencia y robustez del sistema:
 
 ### Implementación del Modelo LLM
 
-El sistema para la implementación del modelo LLM, utilizando LangChain, demuestra ser eficiente y versátil. LangChain facilita la integración y manejo de LLMs mediante sus librerías especializadas para prompts y salidas de texto. La elección del modelo Llama 3 es acertada para el propósito del proyecto, proporcionando respuestas coherentes y contextuales basadas en los embeddings generados previamente.
+El sistema para la implementación del modelo LLM, utilizando LangChain, demuestra ser eficiente y versátil. LangChain facilita la integración y manejo de LLMs mediante sus librerías especializadas para prompts y salidas de texto. El modelo Llama 3 es funcional para el propósito del proyecto, proporcionando respuestas coherentes y contextuales basadas en los embeddings generados previamente.
 
-El proceso de implementación del modelo LLM está bien estructurado y consta de dos métodos principales que permiten una interacción efectiva y flexible con el modelo:
+El proceso de implementación del modelo LLM consta de dos métodos principales que permiten una interacción efectiva con el modelo:
 
 1. **`start()`**: Este método inicializa el modelo Llama 3, definiendo el prompt por defecto y configurando la cadena de procesamiento que incluye el modelo y el parser de salidas. La configuración de un prompt adecuado es crucial para dirigir el comportamiento del modelo y asegurar que las respuestas sean relevantes y contextualmente adecuadas.
 2. **`ask(question, context)`**: Este método permite realizar preguntas al modelo, inyectando tanto la pregunta como el contexto extraído de la base de datos de embeddings en el prompt. Esto asegura que las respuestas del modelo sean informadas y contextualizadas, mejorando la relevancia y precisión de las mismas.
 
 #### Demostraciones de Pruebas
 
-Las pruebas realizadas con diferentes configuraciones de prompts demuestran cómo las instrucciones dadas al modelo afectan significativamente la calidad y el estilo de las respuestas. A continuación, se detallan los resultados de las pruebas utilizando la pregunta: "¿Cuáles son algunas de las contribuciones más significativas de Pelé al fútbol de clubes y al fútbol internacional?"
+Las pruebas realizadas con diferentes configuraciones de prompts demuestran cómo las instrucciones dadas al modelo afectan significativamente la calidad y el estilo de las respuestas. En estas, se verifica el porqué el prompt elegido por defecto es el ideal para cumplir con lo deseado, y que su establecimiento afecta directamente al estilo y al contenido de las respuestas del chat bot.
 
-1. **Prompt 1 - Sin Detalles Específicos**:
-   - **Configuración**: El modelo solo recibe la pregunta y el contexto sin instrucciones adicionales.
-   - **Resultado**: La respuesta es informativa pero carece de interacción dinámica y no utiliza el contexto adecuadamente.
-   - **Conclusión**: Un prompt vacío no es adecuado para el propósito deseado del chat bot.
-2. **Prompt 2 - Historiador de Fútbol**:
-   - **Configuración**: El modelo recibe instrucciones para actuar como un historiador de fútbol, proporcionando respuestas detalladas.
-   - **Resultado**: La respuesta mejora en detalle y relevancia, pero aún no ofrece interacción dinámica ni usa el contexto de manera óptima.
-   - **Conclusión**: Instrucciones específicas mejoran la respuesta, pero es necesario más refinamiento.
-3. **Prompt 3 - Historiador Amable y Atento**:
-   - **Configuración**: Instrucciones adicionales para ser amable, atento y ofrecer más respuestas, incorporando el contexto.
-   - **Resultado**: La respuesta es detallada y ofrece interacción, pero el modelo se refiere directamente al contexto, lo cual es indeseado.
-   - **Conclusión**: El prompt se acerca al comportamiento deseado, pero necesita evitar referencias directas al contexto.
-4. **Prompt 4 - Historiador sin Referencias Directas al Contexto**:
-   - **Configuración**: Similar al prompt 3 pero con instrucciones para no referirse directamente al contexto.
-   - **Resultado**: La respuesta cumple con todos los criterios deseados: es amable, detallada, usa el contexto sin referirse directamente a él y ofrece más interacción.
-   - **Conclusión**: Este prompt es el más adecuado para el propósito del chat bot, logrando un equilibrio óptimo entre interacción y uso del contexto.
+### Análisis de las pruebas realizadas
 
-### Conclusión General
+El chatbot demuestra una competencia sustancial en el manejo de consultas complejas sobre la historia del fútbol. Se puede hacer un análisis en profundidad de sus funcionalidades y rendimiento, basado en las muestras de interacción proporcionadas previamente:
 
-El sistema desarrollado para la generación y almacenamiento de embeddings, así como la implementación del modelo LLM, demuestra ser altamente eficiente y efectivo. La elección de FAISS para la base de datos vectorial y `fitz` para la extracción de texto asegura un rendimiento óptimo, mientras que el modelo `mxbai-embed-large` de Ollama proporciona embeddings de alta calidad. La verificación del almacenamiento en FAISS garantiza la integridad y accesibilidad de los datos.
+- **Precisión histórica y profundidad de conocimientos**: El chatbot proporciona respuestas detalladas e históricamente precisas, como se ve en las respuestas sobre la influencia de Johan Cruyff en el FC Barcelona y la importancia del Maracanazo. Incorpora un contexto rebuscado y explica el impacto a largo plazo de los acontecimientos históricos en la cultura y las tácticas futbolísticas.
+- **Integración del contexto**: El modelo utiliza eficazmente el contexto para enriquecer sus respuestas. Esto se puede ver, por ejemplo, cómo al hablar de Johan Cruyff, no sólo destaca sus contribuciones como jugador y entrenador, sino también su influencia más amplia en la filosofía del fútbol y en las generaciones posteriores. Lo cual es información que proviene del contexto.
+- **Semántica de las respuestas**: Las respuestas del chatbot están bien estructuradas y son coherentes, guiando al usuario a través de una progresión lógica de la información. En las respuestas sobre el dominio y la caída de la selección nacional húngara, y la carrera y el legado de Marta, se puede ver esa congruencia.
+- **Adaptación al prompt**: El chatbot mantiene un tono amable y atento, según las instrucciones, y se ofrece a responder más preguntas, asegurando que el usuario se sienta apoyado durante toda la interacción.
 
-El proceso de implementación del modelo LLM, utilizando LangChain, está bien estructurado y permite una interacción efectiva con el modelo Llama 3. Las pruebas con diferentes configuraciones de prompts muestran cómo las instrucciones adecuadas pueden mejorar significativamente la calidad de las respuestas del modelo. El prompt final, que evita referencias directas al contexto, cumple con todos los criterios deseados, logrando un equilibrio óptimo entre interacción y uso del contexto.
+## Conclusiones Finales
 
-Cómo consecuencia el sistema es robusto, escalable y eficiente, capaz de manejar grandes volúmenes de datos y proporcionar respuestas precisas y contextualmente adecuadas, cumpliendo con los objetivos establecidos para el proyecto.
+El sistema desarrollado para la generación y almacenamiento de embeddings, así como la implementación del modelo LLM, demostró ser de gran utilidad. La elección de FAISS para la base de datos vectorial y fitz para la extracción de texto asegura un rendimiento óptimo, mientras que el modelo `mxbai-embed-large` de Ollama proporciona embeddings de alta calidad. La verificación del almacenamiento en FAISS garantiza la integridad y accesibilidad de los datos. La estructura del proceso de implementación del modelo LLM mediante LangChain permite una interacción efectiva con el modelo Llama 3, mostrando cómo las instrucciones adecuadas pueden mejorar significativamente la calidad de las respuestas del modelo. El prompt final, que evita referencias directas al contexto, cumple con todos los criterios deseados, logrando un equilibrio óptimo entre interacción y uso del contexto.
+
+Como consecuencia, el sistema es robusto, escalable y eficiente, capaz de manejar grandes volúmenes de datos y proporcionar respuestas precisas y contextualmente adecuadas, cumpliendo con los objetivos establecidos para el proyecto. El chatbot de historia del fútbol también destaca por sus profundos conocimientos, su conciencia contextual y su atractivo estilo de interacción. Combina con éxito modelos lingüísticos de última generación con un sólido sistema de recuperación, lo que lo convierte en una valiosa herramienta para cualquier persona interesada en la historia del fútbol. El proyecto pone de relieve el potencial de los sistemas RAG para mejorar la difusión de conocimientos impulsada por la IA y sienta unas bases sólidas para futuras mejoras y ampliaciones.
