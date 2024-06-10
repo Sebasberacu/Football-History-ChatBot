@@ -4,13 +4,15 @@
   - [Models](#models)
   - [Python Virtual Environment](#python-virtual-environment)
     - [New Dependencies](#new-dependencies)
-
+  - [Hugging Face CLI Login](#hugging-face-cli-login)
 
 ## Get Started
 
-For this project, you need to download and install [Ollama](https://ollama.com/download).
+For this project, you need to download and install [Ollama](https://ollama.com/download). 
 
-Once you have installed Ollama, you can execute the setup script for your specific machine:
+Also, you need an account in [Hugging Face](https://huggingface.co/). Once you have created the account, go to `settings` and then go to `Access Tokens` and create a new token with *read* type.
+
+Once you have installed Ollama and you have created the Acces Token in Hugging Face, you can execute the setup script for your specific machine:
 
 * **Windows:** Execute the script `setup-windows.bat`.
 * **Linux or Mac:** Execute the script `setup-linux-mac.sh`.
@@ -82,3 +84,13 @@ pip freeze > requirements.txt
 ```
 
 so you can update the requirements list.
+
+### Hugging Face CLI Login
+
+You need to be logged in Hugging Face in the terminal to execute the notebook.
+
+1. **Login from CLI**
+
+```bash
+huggingface-cli login
+```
