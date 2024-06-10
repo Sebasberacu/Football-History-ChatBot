@@ -5,12 +5,13 @@
   - [Python Virtual Environment](#python-virtual-environment)
     - [New Dependencies](#new-dependencies)
   - [Hugging Face CLI Login](#hugging-face-cli-login)
+  - [Executing The ChatBot](#executing-the-chatbot)
 
 ## Get Started
 
 For this project, you need to download and install [Ollama](https://ollama.com/download). 
 
-Also, you need an account in [Hugging Face](https://huggingface.co/). Once you have created the account, go to `settings` and then go to `Access Tokens` and create a new token with *read* type.
+Also, you need an account in [Hugging Face](https://huggingface.co/). Once you have created the account, go to `settings` and then go to `Access Tokens` and create a new token with *read* type. Also, you need to go to the [Llama3 model](https://huggingface.co/meta-llama/Meta-Llama-3-8B) and request access to it.
 
 Once you have installed Ollama and you have created the Acces Token in Hugging Face, you can execute the setup script for your specific machine:
 
@@ -96,3 +97,11 @@ huggingface-cli login
 ```
 
 2. **Enter the access token**
+
+### Executing The ChatBot
+
+1. Activate the python virtual environment if it is disabled.
+2. Execute the file `src/main.py`.
+3. The bot is going to prompt you a message.
+4. Enter your message and hit enter.
+5. The bot is going to generate a response for you.
