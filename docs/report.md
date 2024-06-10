@@ -41,7 +41,15 @@ La combinación de las avanzadas capacidades de generación de lenguaje de Llama
 
 Leer el archivo `README.md` del proyecto. 
 
-## Generación de los Vectores de Embeddings
+## Almacenamiento de Embeddings
+
+Para almacenar los embeddings se utilizará FAISS (Facebook AI Similarity Search) qué es una biblioteca desarrollada por Facebook AI Research para realizar búsquedas eficientes y rápidas de similitud entre vectores de alta dimensionalidad. Esta herramienta es especialmente útil para manejar grandes volúmenes de datos, como aquellos generados por modelos de aprendizaje profundo en forma de embeddings. FAISS está optimizado para manejar bases de datos con millones o incluso miles de millones de vectores, ofreciendo técnicas avanzadas de indexación que mejoran la velocidad y la precisión de las búsquedas.
+
+El uso de FAISS como base de datos de vectores es altamente beneficioso debido a su escalabilidad y velocidad de búsqueda. Permite almacenar embeddings de manera eficiente y recuperarlos rápidamente para comparaciones de similitud. Además, una vez instalada la librería esta promueve una API que permite acceder fácilemente a sus funciones. Los embeddings se almacenan localmente en un índice llamado `faiss_football_documents`. 
+
+## Generación de Embeddings
+
+En esta sección se detallan todos los pasos necesarios para generar los embeddings y guardarlos localmente en FAISS. 
 
 ### Extracción de Texto
 
@@ -99,7 +107,7 @@ Para genera los generar los embeddings se utilizará el modelo de `ollama` llama
 
 `ollama pull mxbai-embed-large` 
 
-Una vez hecho esto, se utiliza la siguiente función para generar y guardar los embeddings de manera local en disco. Estos son guardados utilizando  
+Una vez hecho esto, se utiliza la siguiente función para generar y guardar los embeddings de manera local en disco. Estos son guardados utilizando FAISS.   
 
 ```python
 def generate_embeddings(documents, index_path="faiss_index"):
