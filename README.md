@@ -88,7 +88,7 @@ so you can update the requirements list.
 
 ### Hugging Face CLI Login
 
-You need to be logged in Hugging Face in the terminal to execute the notebook.
+You need to be logged in Hugging Face in the terminal to execute the notebook `./src/rag_football_chatbot.ipynb`.
 
 1. **Login from CLI**
 
