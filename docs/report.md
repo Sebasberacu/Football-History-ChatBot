@@ -43,9 +43,9 @@ Leer el archivo `README.md` del proyecto.
 
 ## Almacenamiento de Embeddings
 
-Para almacenar los embeddings se utilizará FAISS (Facebook AI Similarity Search) qué es una biblioteca desarrollada por Facebook AI Research para realizar búsquedas eficientes y rápidas de similitud entre vectores de alta dimensionalidad. Esta herramienta es especialmente útil para manejar grandes volúmenes de datos, como aquellos generados por modelos de aprendizaje profundo en forma de embeddings. FAISS está optimizado para manejar bases de datos con millones o incluso miles de millones de vectores, ofreciendo técnicas avanzadas de indexación que mejoran la velocidad y la precisión de las búsquedas.
+Para almacenar los embeddings se utilizará FAISS qué es una biblioteca desarrollada por Facebook AI Research para realizar búsquedas eficientes y rápidas de similitud entre vectores de alta dimensionalidad. Esta herramienta es especialmente útil para manejar grandes volúmenes de datos, como aquellos generados por modelos de aprendizaje profundo en forma de embeddings. FAISS está optimizado para manejar bases de datos con millones o incluso miles de millones de vectores, ofreciendo técnicas avanzadas de indexación que mejoran la velocidad y la precisión de las búsquedas.
 
-El uso de FAISS como base de datos de vectores es altamente beneficioso debido a su escalabilidad y velocidad de búsqueda. Permite almacenar embeddings de manera eficiente y recuperarlos rápidamente para comparaciones de similitud. Además, una vez instalada la librería esta promueve una API que permite acceder fácilemente a sus funciones. Los embeddings se almacenan localmente en un índice llamado `faiss_football_documents`. 
+El uso de FAISS como base de datos de vectores es altamente beneficioso debido a su escalabilidad y velocidad de búsqueda. Además, una vez instalada la librería esta promueve una API que permite acceder fácilemente a sus funciones. Los embeddings se almacenan localmente en un índice llamado `faiss_football_documents`. 
 
 ## Generación de Embeddings
 
@@ -80,7 +80,7 @@ El resultado es: 7084.
 
 ### Generación y Almacenamiento de Embeddings
 
-Una vez extraído el texto, se procede al proceso de calcular los embeddings para guardarlo en una base de datos de vectores. A continuación, se detalla cada paso, y todas las funciones explicadas se encuentran en el archivo `embeddings.py`. Las librerías necesarias:
+Una vez extraído el texto, se procede al proceso de calcular los embeddings para guardarlo en una base de datos de vectores. A continuación, se detalla cada paso, y todas las funciones explicadas se encuentran en el archivo `embeddings.py`. Para realizar estas funciones se va a hacer uso de muchas de las funcionalidades ofrecidas por [Langchain](https://python.langchain.com/v0.1/docs/get_started/quickstart/). Las librerías necesarias son:
 
 ```python
 from langchain_community.embeddings import OllamaEmbeddings
@@ -91,10 +91,10 @@ from langchain.docstore.document import Document
 
 #### División del Texto 
 
-Lo primero será tomar el texto extraído y montarlo en un documento. Luego dividirlo en `chunks` con un máximo de 1000 carácteres y con un `overlap` con un máximo de 200 carácteres. Por último retornar los documentos ya divididos. Para esto se utiliza la siguiente función, que ya recibe cómo parametro un texto extraído. 
+Lo primero será tomar el texto extraído y montarlo en un documento. Luego dividirlo en `chunks` con un máximo de 1000 carácteres y con un `overlap` con un máximo de 200 carácteres. Por último retornar los documentos ya divididos. Para esto se utiliza la siguiente función `splitText(pdf_text)`, que ya recibe cómo parametro un texto extraído. 
 
 ```python
-def split_text(pdf_text):
+def splitText(pdf_text):
     document = Document(page_content=pdf_text)
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     documents = text_splitter.split_documents([document])
@@ -107,10 +107,10 @@ Para genera los generar los embeddings se utilizará el modelo de `ollama` llama
 
 `ollama pull mxbai-embed-large` 
 
-Una vez hecho esto, se utiliza la siguiente función para generar y guardar los embeddings de manera local en disco. Estos son guardados utilizando FAISS.   
+Una vez hecho esto, se utiliza la función `generateEmbeddings(pdf_text)` para generar y guardar los embeddings de manera local en disco. Estos son guardados utilizando FAISS.   
 
 ```python
-def generate_embeddings(documents, index_path="faiss_index"):
+def generateEmbeddings(documents, index_path="faiss_index"):
     embeddings = OllamaEmbeddings(model='mxbai-embed-large')
     db = FAISS.from_documents(documents, embeddings)
     db.save_local(index_path)
