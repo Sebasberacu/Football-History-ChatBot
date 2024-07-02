@@ -1,3 +1,3 @@
-from .llama3 import *
+from .model import *
 from .embeddings import *
 from .text_extraction import *

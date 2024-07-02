@@ -4,8 +4,8 @@ import time
 import pandas as pd
 
 # Create a new instance of the Llama3 class
-llama3 = Llama3()
-llama3.start()
+model = Model()
+model.start()
 
 # Path to the embeddings folder
 currentDir = os.path.dirname(os.path.abspath(__file__))
@@ -37,7 +37,7 @@ def createEmbeddings():
             splittedDocument = splitText(documentText)
             allDocuments.extend(splittedDocument)
         
-        # Print the first 5 documents if wanted
+        # Print the first 5 documents if wanted (in production)
         # df = pd.DataFrame([doc.page_content for doc in allDocuments], columns=["Content"])
         # print(df.head())
 
@@ -52,7 +52,7 @@ def askChatbot(embeddingsDB, question):
     for chunk in questionTopSimilarityChunks: # Join the top similar vectors in a single string
         context += chunk.page_content
 
-    return llama3.ask(question, context) # Ask the model with the provided context
+    return model.ask(question, context) # Ask the model with the provided context
 
 # Initialize the chatbot
 def footballChatBot():

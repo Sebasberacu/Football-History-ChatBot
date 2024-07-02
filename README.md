@@ -1,5 +1,6 @@
-# RAG Soccer ChatBot <!-- omit in toc -->
+# Football History ChatBot <!-- omit in toc -->
 
+- [Introduction](#introduction)
 - [Get Started](#get-started)
   - [Models](#models)
   - [Python Virtual Environment](#python-virtual-environment)
@@ -7,18 +8,21 @@
   - [Hugging Face CLI Login](#hugging-face-cli-login)
   - [Executing The ChatBot](#executing-the-chatbot)
 
+## Introduction
+This project corresponds to a chatbot specialized in world football history. Using natural language processing and information retrieval, the system combines an LLM model, specifically Ollama's Llama3, with a RAG (Retrieval-Augmented Generation) approach to provide contextually rich and accurate responses. Embeddings of relevant historical documents have been created and stored in a FAISS vector database, allowing the model to quickly access detailed and reliable information. The chatbot delivers informative responses and acts as an assistant for those interested.
+
 ## Get Started
 
-For this project, you need to download and install [Ollama](https://ollama.com/download). 
+To be able to run this project, you need to download and install [Ollama](https://ollama.com/download). 
 
-Also, you need an account in [Hugging Face](https://huggingface.co/). Once you have created the account, go to `settings` and then go to `Access Tokens` and create a new token with *read* type. Also, you need to go to the [Llama3 model](https://huggingface.co/meta-llama/Meta-Llama-3-8B) and request access to it.
+Also, you need to go to the [Llama3 model](https://huggingface.co/meta-llama/Meta-Llama-3-8B) and request access to it.
 
 Once you have installed Ollama and you have created the Acces Token in Hugging Face, you can execute the setup script for your specific machine:
 
 * **Windows:** Execute the script `setup-windows.bat`.
 * **Linux or Mac:** Execute the script `setup-linux-mac.sh`.
 
-If you don't want to execute these scripts, you can follow the following instructions.
+You can also follow the following instructions.
 
 ### Models
 
